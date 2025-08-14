@@ -2,9 +2,22 @@
 using namespace std;
 
 int maxcon1(vector<int> arr, int k) {
-    int left = 0, right = 0;
+    int l = 0, r = 0;
     int maxlen = 0;
     int zeros = 0;
+    while(r<arr.size()){
+        if(arr[r]==0) zeros++;
+        if(zeros>k){
+            if(arr[l]==0) zeros--;
+            l++;
+        }
+        if(zeros<=k){
+            maxlen=max(r-l+1,maxlen);
+
+        }
+        r++;
+
+    }
 
     
 

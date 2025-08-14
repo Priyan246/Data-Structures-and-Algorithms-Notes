@@ -1,30 +1,35 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-int maxcon1(vector<int> arr,int k){
-    int n=arr.size(),maxlen(0),l(0),r(0),zeros(0),len(0);
-
-    while(r<n){
-        if (arr[r]==0) zeros++;
-        while(zeros>k) {
-            if(arr[l]==0) zeros--;
-            l++;
+vector<int> sortarr(vector<int> &arr, int n) {
+    int low(0),mid(0),high(n-1);
+    while(mid<=high){
+        if(arr[mid]==0) {
+            swap(arr[mid],arr[low]);
+            mid++;low++;
         }
-        if(zeros<k){
-            
-            maxlen=max(maxlen,r-l+1);
-
+        else if(arr[mid]==1) mid++;
+        else if(arr[mid]==2){
+            swap(arr[mid],arr[high]);
+            high--;
         }
-        r++;
+
+
     }
-    return maxlen;
-};
+    return arr;
 
+}
+int main() {
+    vector<int> arr = {0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0};
+    int n = arr.size();
 
-int main(){
-    vector<int> arr={1,1,1,0,0,0,1,1,1,1,0};
-    int k=2;
-    cout<<maxcon1(arr,k);
+    vector<int> sorted_arr = sortarr(arr, n);
 
+    cout << "Sorted array: ";
+    for (int val : sorted_arr) {
+        cout << val << " ";
+    }
+    cout << endl;
 
+    return 0;
 }
